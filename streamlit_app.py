@@ -1,13 +1,9 @@
 import streamlit as st
 import tempfile
-import essentia
-from essentia.standard import MonoLoader, RhythmExtractor2013
+import librosa
 
 def analyze_mood(tempo, key, harmony, rhythm, timbre):
-    # Happy Mood
-    if tempo > 120 and key == 'major' and harmony == 'consonant' and rhythm == 'simple' and timbre == 'bright':
-        return 'happy'
-    # ... rest of the function code ...
+    # ... (same function code as above) ...
 
 st.title("TITLE LYRIC APP 🎵")
 st.header("Upload Your Music")
@@ -19,11 +15,12 @@ if uploaded_file is not None:
     tfile.write(uploaded_file.read())
     st.audio(tfile.name, format='audio')
 
-    loader = MonoLoader(filename=tfile.name)
-    audio = loader()
+    # Load the audio file with Librosa
+    y, sr = librosa.load(tfile.name)
 
-    rhythm_extractor = RhythmExtractor2013()
-    tempo, beats = rhythm_extractor(audio)
+    # Extract the tempo
+    onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+    tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
 
     st.write(f"Detected tempo: {tempo} beats per minute")
 
