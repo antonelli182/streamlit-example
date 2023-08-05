@@ -3,13 +3,13 @@ import tempfile
 import essentia
 from essentia.standard import MonoLoader, RhythmExtractor2013
 
+def analyze_mood(tempo, key, harmony, rhythm, timbre):
+    # ... (same function code as above) ...
+
 st.title("TITLE LYRIC APP 🎵")
 st.header("Upload Your Music")
 
 uploaded_file = st.file_uploader("Choose an audio file", type=["mp3", "wav", "flac", "aac", "ogg"])
-
-def analyze_mood(tempo, key, harmony, rhythm, timbre):
-    # ... (same function code as above) ...
 
 if uploaded_file is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False) 
