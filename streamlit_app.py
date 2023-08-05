@@ -4,7 +4,10 @@ import essentia
 from essentia.standard import MonoLoader, RhythmExtractor2013
 
 def analyze_mood(tempo, key, harmony, rhythm, timbre):
-    # ... (same function code as above) ...
+    # Happy Mood
+    if tempo > 120 and key == 'major' and harmony == 'consonant' and rhythm == 'simple' and timbre == 'bright':
+        return 'happy'
+    # ... rest of the function code ...
 
 st.title("TITLE LYRIC APP 🎵")
 st.header("Upload Your Music")
